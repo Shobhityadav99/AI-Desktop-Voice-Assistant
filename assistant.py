@@ -3,6 +3,8 @@ import datetime
 import speech_recognition as sr
 import wikipedia
 import webbrowser
+import os
+import random
 
 engine = pyttsx3.init()
 
@@ -61,3 +63,10 @@ if __name__=="__main__":
 
         elif 'open stackoverflow' in query:
             webbrowser.open_new_tab('stackoverflow.com')
+
+        elif 'play music' in query:
+            music_dir='D:\\Songs'
+            songs=os.listdir(music_dir)
+            print(songs)
+            no = random.randrange(0,len(songs))
+            os.startfile(os.path.join(music_dir,songs[no]))
