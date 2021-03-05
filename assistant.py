@@ -8,7 +8,7 @@ import random
 
 engine = pyttsx3.init()
 
-voices= engine.getProperty('voices') #getting details of current voice
+voices= engine.getProperty('voices')
 # print(voices)
 
 engine.setProperty('voice', voices[0].id)
@@ -70,3 +70,11 @@ if __name__=="__main__":
             print(songs)
             no = random.randrange(0,len(songs))
             os.startfile(os.path.join(music_dir,songs[no]))
+
+        elif 'the time' in query:
+            strTime=datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f"Sir , the time is {strTime}")
+        
+        elif 'open code' in query:
+            codepath="C:\\Users\\HP\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            os.startfile(codepath)
