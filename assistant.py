@@ -5,6 +5,7 @@ import wikipedia
 import webbrowser
 import os
 import random
+import smtplib
 
 engine = pyttsx3.init()
 
@@ -44,6 +45,14 @@ def takeCommand():
         return "None"
     return query
 
+def sendEmail(to,content):
+    server=smtplib.SMTP('smtp.gmail.com',587)
+    server.ehlo()
+    server.starttls()
+    server.login('youremail@gmail.com','password')
+    server.sendmail('youremail@gmail.com',to,content)
+    server.close()
+
 if __name__=="__main__":
     # wishme()
     while True:
@@ -78,3 +87,18 @@ if __name__=="__main__":
         elif 'open code' in query:
             codepath="C:\\Users\\HP\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codepath)
+
+        elif 'send an email' in query:
+            try:
+                speak("What should i say?")
+                content = takeCommand()
+                to = "youremail@gmail.com"
+                sendEmail(to,content)
+                speak("Your Email has been sent")
+            except Exception as e:
+                print(e)
+                speak("Sorry Shobhit! I am not able to send any mails right now")
+
+        elif 'quit' in query:
+            exit()
+            
